@@ -1,0 +1,26 @@
+<mat-card class="toppingsClass">
+    <mat-card-header>Add Topping</mat-card-header>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Topping Name</mat-label>
+            <input matInput placeholder="Name" [(ngModel)]="topping.name" name="topping" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input matInput tye="number" placeholder="Quantity" [(ngModel)]="topping.quantity" name="quantity" required>
+        </mat-form-field>
+        <mat-card-actions>
+            <button mat-raised-button (click)="addTopping()" color="primary">Add Topping</button>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngFor="let topping of toppings" class="toppingClass">
+    <mat-card-header>{{topping.name}}</mat-card-header>
+    <mat-card-content>
+        <mat-label>Current Quantity:</mat-label> {{topping.quantity}}
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="deleteTopping(topping.id)">Delete Topping</button>
+    </mat-card-actions>
+</mat-card>

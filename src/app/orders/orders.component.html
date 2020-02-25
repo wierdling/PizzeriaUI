@@ -1,0 +1,72 @@
+<div style="padding: 13px;">
+    <mat-spinner *ngIf="crusts.length === 0"></mat-spinner>
+
+    <mat-card class="orderCard">
+        <mat-card-header>
+            <mat-card-title>Create Pizza</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field>
+                <mat-label>Size</mat-label>
+                <mat-select [(ngModel)]="selectedSize">
+                    <mat-option *ngFor="let size of sizes" [value]="size">
+                        {{size}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <hr>
+            <mat-form-field>
+                <mat-label>Crust</mat-label>
+                <mat-select [(ngModel)]="selectedCrust">
+                    <mat-option *ngFor="let crust of crusts" [value]="crust">
+                        {{crust}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <hr>
+            <mat-form-field>
+                <mat-label>Topping</mat-label>
+                <mat-select [(ngModel)]="selectedTopping">
+                    <mat-option *ngFor="let topping of toppings" [value]="topping.name">
+                        {{topping.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button (click)="addTopping()" color="accent" style="margin-left: 15px;">Add Topping</button>
+
+            <div *ngFor="let topping of currentToppings">
+                {{topping}} <button mat-button (click)="deleteTopping(topping)" color="warn"><i
+                        class="material-icons">delete</i></button>
+            </div>
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="addToOrder()" color="primary">Add to Order</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <div *ngIf="null != currentOrder">
+        <mat-card class="orderCard">
+            <mat-card-header>Your Order</mat-card-header>
+            <mat-card-content *ngFor="let pizza of currentOrder.pizzas, let i = index">
+                <div class="pizzaSummary">
+                    <h2>Pizza #{{i + 1}}</h2>
+                    <p>Size: {{pizza.size}}</p>
+                    <p>Crust: {{pizza.crustType}}</p>
+                    <p>Toppings:</p>
+                    <div *ngFor="let topping of pizza.toppings">
+                        {{topping}} <button mat-button (click)="deletePizzaTopping(pizza, topping)" color="warn"><i
+                                class="material-icons">delete</i></button>
+                    </div>
+                    <button mat-button (click)="removePizzaFromOrder(i)" color="warn"><i
+                            class="material-icons">delete</i> Pizza</button>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="submitOrder()" color="primary">Submit Order</button>
+                <button mat-button (click)="deleteOrder()" color="warn"><i class="material-icons">delete</i>
+                    Order</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

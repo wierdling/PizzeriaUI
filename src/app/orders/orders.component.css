@@ -1,0 +1,16 @@
+.mat-select {
+    max-width: 500px;
+}
+
+.orderCard {
+    max-width: 33%;
+    margin-left: 33%;
+    margin-top: 10px;
+}
+
+.pizzaSummary {
+    padding: 15px;
+    border: 1px solid gray;
+    border-radius: 25px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+}
